@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина про Рубцовск</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #808080;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 18px;
+            padding: 15px;
+            background-color: #666;
+            border-radius: 10px;
+        }
+        
+        .quiz-block {
+            background-color: #666;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .question {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+        
+        .check-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .check-button:hover {
+            background-color: #45a049;
+        }
+        
+        .result-image {
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .intro-text {
+                font-size: 16px;
+            }
+            
+            .question {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="intro-text">
+            Что ж, чтобы пройти дальше нужно поработать мозгами: ответь на 4 вопроса про родину Ксюшки верно и мы двигаемся дальше!
+        </div>
+        
+        <div class="quiz-block">
+            <div class="question">1. Напротив чего стоит дом Ксюшки?</div>
+            <input type="text" class="answer-input" id="answer1" placeholder="Введите ответ">
+        </div>
+        
+        <div class="quiz-block">
+            <div class="question">2. Самый лучший магазин в мире?</div>
+            <input type="text" class="answer-input" id="answer2" placeholder="Введите ответ">
+        </div>
+        
+        <div class="quiz-block">
+            <div class="question">3. Самый большой тц города Рубцовска?</div>
+            <input type="text" class="answer-input" id="answer3" placeholder="Введите ответ">
+        </div>
+        
+        <div class="quiz-block">
+            <div class="question">4. Сколько колоний в Рубцовске?</div>
+            <input type="text" class="answer-input" id="answer4" placeholder="Введите ответ">
+        </div>
+        
+        <button class="check-button" onclick="checkAnswers()">Проверить ответ</button>
+        
+        <img src="mashina.jpg" alt="Машина" class="result-image" id="resultImage">
+    </div>
+
+    <script>
+        function checkAnswers() {
+            // Получаем значения ответов
+            const answer1 = document.getElementById('answer1').value.trim().toLowerCase();
+            const answer2 = document.getElementById('answer2').value.trim().toLowerCase();
+            const answer3 = document.getElementById('answer3').value.trim().toLowerCase();
+            const answer4 = document.getElementById('answer4').value.trim().toLowerCase();
+            
+            // Правильные ответы
+            const correctAnswers = {
+                1: 'военкомат',
+                2: 'аникс',
+                3: 'радуга',
+                4: '3'
+            };
+            
+            // Проверяем все ответы
+            if (answer1 === correctAnswers[1] && 
+                answer2 === correctAnswers[2] && 
+                answer3 === correctAnswers[3] && 
+                answer4 === correctAnswers[4]) {
+                
+                // Показываем изображение
+                document.getElementById('resultImage').style.display = 'block';
+                
+                // Прокручиваем к изображению
+                document.getElementById('resultImage').scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+            } else {
+                alert('Не все ответы верные! Попробуйте ещё раз.');
+            }
+        }
+        
+        // Добавляем возможность нажимать Enter для проверки
+        document.querySelectorAll('.answer-input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkAnswers();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
